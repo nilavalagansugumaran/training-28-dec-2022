@@ -8,8 +8,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class BankServiceImpl implements BankService{
 
-    @Autowired
+    // property injection
+    //@Autowired
     private BankRepository repository;
+
+    @Autowired
+    public BankServiceImpl(BankRepository repository) {
+        this.repository = repository;
+    }
 
     @Override
     public void withdraw() {
