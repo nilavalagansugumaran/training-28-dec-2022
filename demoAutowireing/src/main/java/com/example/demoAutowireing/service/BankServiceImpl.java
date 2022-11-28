@@ -6,21 +6,33 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class BankServiceImpl implements BankService{
 
     // property injection
     //@Autowired
-    private BankRepository repository;
+    //private BankRepository repository;
 
+//    @Autowired
+//    public BankServiceImpl(@Qualifier("currentAccountRepository") BankRepository repository) {
+//        this.repository = repository;
+//    }
+
+    private List<BankRepository> repository;
     @Autowired
-    public BankServiceImpl(@Qualifier("currentAccountRepository") BankRepository repository) {
+    public BankServiceImpl(List<BankRepository> repository) {
         this.repository = repository;
     }
 
     @Override
     public void withdraw() {
         System.out.println("Bank service impl - withdraw");
-        repository.doWithdraw();
+        //repository.doWithdraw();
+
+        repository.stream().forEach(s -> {
+            s.doWithdraw();
+        });
     }
 }
