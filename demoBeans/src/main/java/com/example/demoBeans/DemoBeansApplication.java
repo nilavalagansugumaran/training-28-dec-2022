@@ -23,6 +23,9 @@ public class DemoBeansApplication {
 		} else {
 			System.out.println("both are different objects");
 		}
+
+		// access lazy bean
+		System.out.println(ctx.getBean(MyLazyBean.class).toString());
 	}
 
 }
