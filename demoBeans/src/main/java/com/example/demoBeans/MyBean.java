@@ -2,7 +2,7 @@ package com.example.demoBeans;
 
 import org.springframework.stereotype.Component;
 
-@Component
+@Component("nila")
 public class MyBean {
 
     @Override
