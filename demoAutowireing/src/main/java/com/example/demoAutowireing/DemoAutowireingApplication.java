@@ -12,6 +12,7 @@ public class DemoAutowireingApplication {
 
 		ApplicationContext ctx = SpringApplication.run(DemoAutowireingApplication.class, args);
 		ctx.getBean(BankService.class).withdraw();
+		System.out.println(ctx.getBean(MyBean.class).toString());
 	}
 
 }
