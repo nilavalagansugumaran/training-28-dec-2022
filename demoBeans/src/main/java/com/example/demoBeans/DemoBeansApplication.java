@@ -1,10 +1,13 @@
 package com.example.demoBeans;
 
+import com.example.outpackage.MyOuterClass;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
+@ComponentScan(basePackages = "com.example")
 public class DemoBeansApplication {
 
 	public static void main(String[] args) {
@@ -26,6 +29,10 @@ public class DemoBeansApplication {
 
 		// access lazy bean
 		System.out.println(ctx.getBean(MyLazyBean.class).toString());
+
+
+		// access outer package bean
+		System.out.println(ctx.getBean(MyOuterClass.class).toString());
 	}
 
 }
