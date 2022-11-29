@@ -1,0 +1,27 @@
+employee:
+  name: Nila
+  email: Nila@nila.com
+  address:
+    postcode: RG40
+
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+employee:
+  name: NilaDev
+  email: Nila@nila.com
+  address:
+    postcode: RG40
+
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+employee:
+  name: Nilaprod
+  email: Nila@nila.com
+  address:
+    postcode: RG40
