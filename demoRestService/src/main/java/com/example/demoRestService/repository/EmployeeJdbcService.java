@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -33,18 +34,21 @@ public class EmployeeJdbcService implements MyService {
 
 
     @Override
+    @Transactional
     public void createEmployee(Employee employee) {
-
+        jdbcTemplate.update("insert into employee(name, email, salary) values (?,?,?)",employee.getName(), employee.getEmail(), employee.getSalary() );
     }
 
     @Override
+    @Transactional
     public void updateEmployee(int id, Employee employee) {
-
+        jdbcTemplate.update("update employee set salary=? where id=?",employee.getSalary(), employee.getId() );
     }
 
     @Override
+    @Transactional
     public void deleteEmployee(int id) {
-
+        jdbcTemplate.update("delete * from employee where id =?", id );
     }
 
     @Override
