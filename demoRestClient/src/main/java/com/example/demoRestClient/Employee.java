@@ -1,5 +1,6 @@
 package com.example.demoRestClient;
 
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import lombok.*;
 
 @Data
@@ -7,6 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@JacksonXmlRootElement
 public class Employee {
 
     private String name;

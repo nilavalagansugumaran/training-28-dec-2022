@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rest Client</title>
+	<style>
+		body {
+			font-family: Calibri;
+		}
+
+		.employee {
+			width: 50%;
+			background-color: dodgerblue;
+			color: white;
+		}
+	</style>
+</head>
+<body>
+
+<div id="app-root"></div>
+
+<script src="https://unpkg.com/prop-types/prop-types.js"></script>
+<script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+
+<script type="text/babel">
+
+    function Employee({e}) {
+    	return (
+			<React.Fragment>
+				<h3>{e.name}</h3>
+				<div className="employee">
+					<div>ID: {e.id}</div>
+					<div>Name: {e.name}</div>
+					<div>Salary: {e.salary}</div>
+				</div>
+			</React.Fragment>
+		)
+	}
+
+    function App({baseAddress}) {
+
+    	console.log("App is being rendered")
+
+		const [currentEmployee, setCurrentEmployee] = React.useState(null)
+
+		// XMLHttpRequest
+		const doGetEmployee = async () => {
+			try {
+				const id = document.getElementById("employeeId").value
+				const url = `${baseAddress}/${id}`
+				const response = await window.fetch(url)
+				if (!response.ok) {
+					throw Error(response.statusText)
+				}
+				const employee = await response.json();
+				setCurrentEmployee(employee)
+			} catch (error) {
+				console.log(error)
+			}
+		}
+		return (
+			<React.Fragment>
+				<h3>Demo calling REST services from a React client</h3>
+
+				<input type="text" id="employeeId" placeholder="Enter employee ID"/>
+				<button onClick={doGetEmployee}>Get Employee As JSON</button>
+				<br/>
+				<br/>
+
+				{(currentEmployee) ?
+						<Employee e={currentEmployee}/> :
+						<h3>Employee will be displayed here</h3>
+				}
+			</React.Fragment>
+		)
+	}
+
+    ReactDOM.render(
+        <App baseAddress="http://localhost:8080/employee" />,
+        document.getElementById("app-root")
+    )
+
+</script>
+
+</body>
+</html>
