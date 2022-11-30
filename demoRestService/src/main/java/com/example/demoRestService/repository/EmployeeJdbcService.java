@@ -7,9 +7,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 @Repository
@@ -28,10 +31,6 @@ public class EmployeeJdbcService implements MyService {
         jdbcTemplate.update("insert into employee(name, email, salary) values (?,?,?)","Andy", "Andy@nila.com", 4000.00 );
     }
 
-    @Override
-    public Employee getEmployeeById(int id) {
-        return null;
-    }
 
     @Override
     public void createEmployee(Employee employee) {
@@ -49,7 +48,23 @@ public class EmployeeJdbcService implements MyService {
     }
 
     @Override
+    public Employee getEmployeeById(int id) {
+        return jdbcTemplate.queryForObject("select * from employee where id=?", new EmployeeROwMapper(), id );
+    }
+    @Override
     public List<Employee> getAllEmployees() {
-        return null;
+        return jdbcTemplate.query("select * from employee", new EmployeeROwMapper());
+    }
+
+    public static class EmployeeROwMapper implements RowMapper<Employee> {
+        @Override
+        public Employee mapRow(ResultSet rs, int rowNum) throws SQLException {
+            return Employee.builder()
+                    .id(rs.getInt("id"))
+                    .name(rs.getString("name"))
+                    .email(rs.getString("email"))
+                    .salary(rs.getDouble("salary"))
+                    .build();
+        }
     }
 }
