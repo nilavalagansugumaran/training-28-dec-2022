@@ -48,7 +48,7 @@ public class EmployeeJdbcService implements MyService {
     @Override
     @Transactional
     public void deleteEmployee(int id) {
-        jdbcTemplate.update("delete * from employee where id =?", id );
+        jdbcTemplate.update("delete from employee where id =?", id );
     }
 
     @Override
