@@ -1,6 +1,7 @@
 package com.example.demoRestService.services;
 
 import com.example.demoRestService.models.Employee;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -10,7 +11,8 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Service
-public class EmployeeService {
+@Profile("mock")
+public class EmployeeService implements MyService {
 
     private static Map<Integer, Employee> employeeRepository = new ConcurrentHashMap<>();
 

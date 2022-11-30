@@ -2,6 +2,7 @@ package com.example.demoRestService.controllers;
 
 import com.example.demoRestService.models.Employee;
 import com.example.demoRestService.services.EmployeeService;
+import com.example.demoRestService.services.MyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,9 +14,9 @@ import java.util.List;
 @CrossOrigin
 public class EmployeeController {
 
-    private EmployeeService service;
+    private MyService service;
     @Autowired
-    public EmployeeController(EmployeeService service) {
+    public EmployeeController(MyService service) {
         this.service = service;
     }
 
