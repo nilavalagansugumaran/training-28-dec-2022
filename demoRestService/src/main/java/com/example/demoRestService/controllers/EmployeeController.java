@@ -4,7 +4,10 @@ import com.example.demoRestService.models.Employee;
 import com.example.demoRestService.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class EmployeeController {
@@ -37,11 +40,18 @@ public class EmployeeController {
     public void updateEmployee(@RequestBody Employee employee, @PathVariable("id") int id){
         service.updateEmployee(id, employee);
     }
-    
+
     //delete
     @DeleteMapping(path = "/employee/{id}", produces = {"application/json", "application/xml"})
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteEmployee(@PathVariable("id") int id){
         service.deleteEmployee(id);
+    }
+
+    @GetMapping(path = "/employee", produces = {"application/json", "application/xml"})
+   // @ResponseStatus(HttpStatus.ACCEPTED)
+    public ResponseEntity<List<Employee>> readAllEmployees(){
+
+        return ResponseEntity.ok().header("x-size", String.valueOf(service.getAllEmployees().size())).body(service.getAllEmployees());
     }
 }

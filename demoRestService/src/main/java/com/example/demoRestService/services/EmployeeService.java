@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -36,4 +37,7 @@ public class EmployeeService {
         employeeRepository.remove(id);
     }
 
+    public List<Employee> getAllEmployees(){
+        return employeeRepository.values().stream().toList();
+    }
 }
