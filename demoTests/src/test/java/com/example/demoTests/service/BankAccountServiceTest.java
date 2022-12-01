@@ -25,13 +25,15 @@ class BankAccountServiceTest {
     @Test
     void testDeposit(){
         //given
-        when(repository.getBankAccountById(anyInt())).thenReturn(new BankAccount());
+        BankAccount ba = new BankAccount();
+        when(repository.getBankAccountById(anyInt())).thenReturn(ba);
         //when(repository.getBankAccountById(anyInt())).thenThrow(new RuntimeException("ERROR"));
 
         //when
         service.depositToAccount(1234, 200);
 
         //then
+        assertEquals(200, ba.getBalance());
         verify(repository).getBankAccountById(anyInt());
     }
 }

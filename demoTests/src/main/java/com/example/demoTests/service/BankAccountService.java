@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class BankAccountService {
 
-    @Autowired
+    @Autowired(required = false)
     BankRepository repository;
 
     public void  depositToAccount(int accountNumber, double amount) {
