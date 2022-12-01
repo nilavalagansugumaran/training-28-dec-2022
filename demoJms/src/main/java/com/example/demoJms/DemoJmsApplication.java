@@ -11,6 +11,7 @@ public class DemoJmsApplication {
 	public static void main(String[] args) {
 		ApplicationContext ctx = SpringApplication.run(DemoJmsApplication.class, args);
 		ctx.getBean(MySender.class).sendMyMessage();
+		ctx.getBean(MySender.class).sendEmployeeMessage();
 	}
 
 }
